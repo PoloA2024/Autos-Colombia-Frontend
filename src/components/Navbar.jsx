@@ -6,7 +6,7 @@ function Navbar({ role }) {
 
   const handleLogout = async () => {
     try {
-      await axios.post('http://localhost:8080/logout', {}, { withCredentials: true });
+      await axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, { withCredentials: true });
       localStorage.removeItem('rol');
       localStorage.removeItem('email');
       window.location.href = '/login';
@@ -19,7 +19,6 @@ function Navbar({ role }) {
   return (
     <nav>
       <div style={{ fontWeight: 'bold', fontSize: '1.2rem', color: 'white' }}>Autos Colombia</div>
-
 
       {role === 'ROLE_VENDEDOR' && (
         <>
@@ -48,4 +47,3 @@ function Navbar({ role }) {
 }
 
 export default Navbar;
-
