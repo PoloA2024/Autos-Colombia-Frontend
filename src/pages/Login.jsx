@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
+import API_URL from '../config'; // 👈 importa la URL del backend
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +14,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8080/auth/login', {
+      const response = await axios.post(`${API_URL}/auth/login`, {
         email,
         password,
       }, {
@@ -68,4 +69,3 @@ const Login = () => {
 };
 
 export default Login;
-
