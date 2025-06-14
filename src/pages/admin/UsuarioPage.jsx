@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config'; // Ajusta la ruta si tu estructura es distinta
 
 function UsuarioPage() {
   const [usuarios, setUsuarios] = useState([]);
@@ -11,10 +12,9 @@ function UsuarioPage() {
   });
   const [error, setError] = useState(null);
 
-
   const cargarUsuarios = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/usuarios', { withCredentials: true });
+      const res = await axios.get(`${API_URL}/api/usuarios`, { withCredentials: true });
       setUsuarios(res.data);
     } catch (err) {
       setError('Error cargando usuarios');
@@ -29,22 +29,20 @@ function UsuarioPage() {
     setNuevoUsuario({ ...nuevoUsuario, [e.target.name]: e.target.value });
   };
 
-  // Crear nuevo usuario
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/api/usuarios', nuevoUsuario, { withCredentials: true });
+      await axios.post(`${API_URL}/api/usuarios`, nuevoUsuario, { withCredentials: true });
       setNuevoUsuario({ nombre: '', email: '', password: '', rol: '' });
-      cargarUsuarios(); // refrescar lista
+      cargarUsuarios();
     } catch (err) {
       setError('Error creando usuario');
     }
   };
 
-  // Eliminar usuario
   const handleEliminar = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/api/usuarios/${id}`, { withCredentials: true });
+      await axios.delete(`${API_URL}/api/usuarios/${id}`, { withCredentials: true });
       cargarUsuarios();
     } catch (err) {
       setError('Error eliminando usuario');
@@ -108,5 +106,3 @@ function UsuarioPage() {
 }
 
 export default UsuarioPage;
-
-

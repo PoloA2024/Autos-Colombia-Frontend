@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 
 const IngresoForm = () => {
   const [placa, setPlaca] = useState('');
@@ -11,34 +12,32 @@ const IngresoForm = () => {
     setMensaje('');
     setError('');
 
-     try {
+    try {
+      await axios.post(
+        `${API_URL}/api/ingresos?placa=${placa}`,
+        {},
+        { withCredentials: true }
+      );
 
-  await axios.post(
-    `http://localhost:8080/api/ingresos?placa=${placa}`,
-    {},
-    { withCredentials: true }
-  );
+      setMensaje(`Ingreso registrado para la placa: ${placa}`);
 
-  setMensaje(`Ingreso registrado para la placa: ${placa}`);
+      const response = await axios.get(
+        `${API_URL}/api/ingresos/factura?placa=${placa}`,
+        {
+          responseType: 'blob',
+          withCredentials: true,
+        }
+      );
 
-  const response = await axios.get(
-    `http://localhost:8080/api/ingresos/factura?placa=${placa}`,
-    {
-      responseType: 'blob',
-      withCredentials: true  
+      const file = new Blob([response.data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+
+      setPlaca('');
+    } catch (err) {
+      setError('Error al registrar el ingreso o abrir la factura.');
+      console.error(err);
     }
-  );
-
-  const file = new Blob([response.data], { type: 'application/pdf' });
-  const fileURL = URL.createObjectURL(file);
-  window.open(fileURL);
-
-  setPlaca('');
-} catch (err) {
-  setError('Error al registrar el ingreso o abrir la factura.');
-  console.error(err);
-}
-
   };
 
   return (

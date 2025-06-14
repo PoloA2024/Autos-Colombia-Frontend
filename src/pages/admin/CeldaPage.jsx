@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config'; // Ajusta la ruta según tu estructura
 
 const CeldaPage = ({ celdasActualizadas }) => {
   const [celdas, setCeldas] = useState([]);
@@ -7,7 +8,7 @@ const CeldaPage = ({ celdasActualizadas }) => {
 
   const obtenerCeldas = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/celdas', { withCredentials: true });
+      const response = await axios.get(`${API_URL}/api/celdas`, { withCredentials: true });
       setCeldas(response.data);
     } catch (err) {
       setError('Error al obtener celdas');

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { API_URL } from "../../config"; // Ajusta si tu ruta es diferente
 
 function HistorialPagos() {
   const [fecha, setFecha] = useState('');
@@ -10,7 +11,9 @@ function HistorialPagos() {
 
   const buscarPagos = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/pagos/fecha?fecha=${fecha}`, { withCredentials: true });
+      const response = await axios.get(`${API_URL}/api/pagos/fecha?fecha=${fecha}`, {
+        withCredentials: true
+      });
       const lista = response.data;
       setPagos(lista);
       const suma = lista.reduce((acc, pago) => acc + pago.valorPagado, 0);

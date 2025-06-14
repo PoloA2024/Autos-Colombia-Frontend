@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../config"; // ajusta la ruta según tu estructura
 
 function PagoForm() {
   const [placa, setPlaca] = useState('');
@@ -13,20 +14,19 @@ function PagoForm() {
 
     try {
       const response = await axios.post(
-      `http://localhost:8080/api/pagos/registrarPago?placa=${placa}`,
-      {},
-      { withCredentials: true }
-    );
+        `${API_URL}/api/pagos/registrarPago?placa=${placa}`,
+        {},
+        { withCredentials: true }
+      );
 
       setValorPagado(response.data);
       setMensaje(`Pago registrado. Total a pagar: $${response.data}`);
 
-      window.open(`http://localhost:8080/api/pagos/factura?placa=${placa}`, "_blank");
+      window.open(`${API_URL}/api/pagos/factura?placa=${placa}`, "_blank");
     } catch (error) {
       setMensaje('Error: No se pudo registrar el pago, placa no encontrada.');
       alert("Error: " + error.message);
     }
-
   };
 
   return (

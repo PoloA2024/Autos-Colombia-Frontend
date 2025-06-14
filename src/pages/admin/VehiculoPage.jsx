@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../config';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function VehiculoPage() {
@@ -8,7 +9,7 @@ function VehiculoPage() {
 
   const buscarPorFecha = () => {
     if (fechaSeleccionada) {
-      axios.get(`http://localhost:8080/api/vehiculos/fecha?fecha=${fechaSeleccionada}`, { withCredentials: true })
+      axios.get(`${API_URL}/api/vehiculos/fecha?fecha=${fechaSeleccionada}`, { withCredentials: true })
         .then(response => {
           if (Array.isArray(response.data)) {
             setVehiculos(response.data);
@@ -81,4 +82,3 @@ function VehiculoPage() {
 }
 
 export default VehiculoPage;
-
