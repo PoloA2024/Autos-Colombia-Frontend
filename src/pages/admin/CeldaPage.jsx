@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../config'; // Ajusta la ruta según tu estructura
+import  API_URL  from '../../config'; // Ajusta la ruta según tu estructura
 
 const CeldaPage = ({ celdasActualizadas }) => {
   const [celdas, setCeldas] = useState([]);

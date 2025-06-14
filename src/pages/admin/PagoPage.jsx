@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../config"; // ajusta la ruta según tu estructura
+import API_URL  from "../../config"; // ajusta la ruta según tu estructura
 
 function PagoForm() {
   const [placa, setPlaca] = useState('');

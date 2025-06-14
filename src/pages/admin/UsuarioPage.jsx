@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../config'; // Ajusta la ruta si tu estructura es distinta
+import API_URL from '../../config'; // Ajusta la ruta si tu estructura es distinta
 
 function UsuarioPage() {
   const [usuarios, setUsuarios] = useState([]);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../config"; // Asegúrate que la ruta a config.js sea correcta
+import  API_URL  from "../../config"; // Asegúrate que la ruta a config.js sea correcta
 
 const IngresoForm = () => {
   const [placa, setPlaca] = useState('');

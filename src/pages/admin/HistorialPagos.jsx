@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { API_URL } from "../../config"; // Ajusta si tu ruta es diferente
+import API_URL  from "../../config"; // Ajusta si tu ruta es diferente
 
 function HistorialPagos() {
   const [fecha, setFecha] = useState('');

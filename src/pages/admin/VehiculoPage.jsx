@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { API_URL } from '../../config';
+import  API_URL from '../../config';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function VehiculoPage() {
